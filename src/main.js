@@ -1,8 +1,12 @@
 import Phaser from 'phaser'
+import { inject } from '@vercel/analytics'
 import MainMenuScene from './scenes/MainMenuScene.js'
 import GamePlayScene from './scenes/GamePlayScene.js'
 import GameOverScene from './scenes/GameOverScene.js'
 import { GameState } from './utils/GameState.js'
+
+// Initialize Vercel Analytics
+inject()
 
 // Initialize game state
 window.gameState = new GameState()

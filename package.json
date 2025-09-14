@@ -7,7 +7,12 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "keywords": ["phaser", "game", "arcade", "dinosaurs"],
+  "keywords": [
+    "phaser",
+    "game",
+    "arcade",
+    "dinosaurs"
+  ],
   "author": "",
   "license": "MIT",
   "description": "A Jurassic Park meets city arcade game built with Phaser.js",
@@ -15,6 +20,7 @@
     "vite": "^5.0.0"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "phaser": "^3.70.0"
   }
 }

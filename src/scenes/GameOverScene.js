@@ -1,3 +1,5 @@
+import { track } from '@vercel/analytics'
+
 export default class GameOverScene extends Phaser.Scene {
     constructor() {
         super({ key: 'GameOverScene' })
@@ -34,6 +36,20 @@ export default class GameOverScene extends Phaser.Scene {
 
         // Get game data
         const gameData = window.gameState.getGameData()
+        
+        // Track game completion with comprehensive analytics
+        track('game_completed', {
+            finalScore: gameData.score,
+            level: gameData.level,
+            dinosaursKilled: gameData.dinosaursKilled,
+            maxCombo: gameData.maxCombo,
+            livesLost: 3 - gameData.lives,
+            isNewHighScore: gameData.score >= gameData.highScore,
+            previousHighScore: gameData.highScore,
+            deviceType: window.innerWidth < 768 ? 'mobile' : 'desktop',
+            orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
+            sessionDuration: gameData.sessionDuration || 0
+        })
         
         // Score display
         const finalScoreText = this.add.text(this.cameras.main.centerX, 250, `PUNTEGGIO FINALE: ${gameData.score}`, {
@@ -349,6 +365,12 @@ export default class GameOverScene extends Phaser.Scene {
     }
 
     playAgain() {
+        // Track play again action
+        track('play_again_clicked', {
+            deviceType: window.innerWidth < 768 ? 'mobile' : 'desktop',
+            orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
+        })
+        
         // Reset game state
         window.gameState.reset()
         window.gameState.gameRunning = true
@@ -358,6 +380,12 @@ export default class GameOverScene extends Phaser.Scene {
     }
 
     goToMenu() {
+        // Track return to menu action
+        track('return_to_menu', {
+            deviceType: window.innerWidth < 768 ? 'mobile' : 'desktop',
+            orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
+        })
+        
         // Go to main menu
         this.scene.start('MainMenuScene')
     }
