@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>Dino City Arcade Game</title>
+    <style>
+        /* CSS Reset with iOS optimizations */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        /* Full screen setup with iOS Safari support */
+        html {
+            width: 100%;
+            height: 100%;
+            height: 100vh; /* Fallback */
+            height: -webkit-fill-available; /* iOS Safari */
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+        
+        body {
+            width: 100%;
+            height: 100%;
+            height: 100vh; /* Fallback */
+            height: -webkit-fill-available; /* iOS Safari */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #2d4a36 0%, #1a1a1a 100%);
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Game container - always full screen */
+        #game-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            height: -webkit-fill-available; /* iOS Safari */
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Canvas - responsive and centered */
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain;
+            background: #2d4a36;
+        }
+        
+        /* Loading text */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #7fb069;
+            font-size: 20px;
+            text-align: center;
+            z-index: 100;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* iOS specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            /* iOS Safari specific */
+            html {
+                height: -webkit-fill-available;
+            }
+            
+            body {
+                height: -webkit-fill-available;
+                min-height: -webkit-fill-available;
+            }
+            
+            #game-container {
+                height: -webkit-fill-available;
+                min-height: -webkit-fill-available;
+            }
+        }
+        
+        /* Mobile landscape optimization */
+        @media screen and (orientation: landscape) and (max-height: 500px) {
+            body {
+                height: 100vh;
+                min-height: 100vh;
+            }
+            
+            #game-container {
+                height: 100vh;
+                min-height: 100vh;
+            }
+        }
+        
+        /* Prevent scrolling on mobile */
+        @media (hover: none) and (pointer: coarse) {
+            html, body {
+                overflow: hidden;
+                position: fixed;
+                overscroll-behavior: none;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .loading {
+                font-size: 18px;
+            }
+        }
+        
+        /* Desktop only - add some styling */
+        @media screen and (min-width: 1025px) and (hover: hover) {
+            #game-container {
+                border: 3px solid #4a6741;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(74, 103, 65, 0.3);
+                width: 90vw;
+                height: 90vh;
+                top: 5vh;
+                left: 5vw;
+            }
+            
+            canvas {
+                border-radius: 7px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div class="loading">Loading Dino City...</div>
+    </div>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
